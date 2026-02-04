@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Endless Runner - 2D Game</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Title Screen -->
+    <div id="titleScreen" class="screen">
+        <h1>🏃 Endless Runner</h1>
+        <p class="subtitle">棒人間を操作して障害物を避けよう!</p>
+        
+        <div class="difficulty-select">
+            <h2>難易度を選択</h2>
+            <button class="difficulty-btn" data-difficulty="easy">イージー</button>
+            <button class="difficulty-btn" data-difficulty="normal">ノーマル</button>
+            <button class="difficulty-btn" data-difficulty="hard">ハード</button>
+        </div>
+        
+        <div class="controls-info">
+            <h3>操作方法</h3>
+            <p>PC: クリック または Enter キー</p>
+            <p>スマホ: 画面タップ</p>
+        </div>
+    </div>
+
+    <!-- Game Screen -->
+    <div id="gameScreen" class="screen" style="display: none;">
+        <div class="game-info">
+            <div class="info-item">スコア: <span id="score">0</span></div>
+            <div class="info-item">難易度: <span id="currentDifficulty">-</span></div>
+        </div>
+        <canvas id="gameCanvas"></canvas>
+    </div>
+
+    <!-- Game Over Screen -->
+    <div id="gameOverScreen" class="screen" style="display: none;">
+        <h1>Game Over</h1>
+        <p class="final-score">スコア: <span id="finalScore">0</span></p>
+        <button id="retryBtn" class="action-btn">リトライ</button>
+        <button id="backToTitleBtn" class="action-btn">タイトルへ戻る</button>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
