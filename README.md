@@ -1,155 +1,100 @@
-# 🏃 Endless Runner - 2D Web Game
+# Sky Sprint — 2D エンドレスランナー
 
-ブラウザで遊べる2Dエンドレスランナーゲームです。棒人間を操作して障害物を避けながら、できるだけ長く生き延びましょう!
+**Sky Sprint** は、ブラウザですぐ遊べるCanvasベースの2Dエンドレスランナーです。棒人間ランナーを一度のジャンプで操作し、障害物を避け、コインとパワーアップを集めながら自己ベストを更新します。外部ライブラリ、広告、トラッキング、サーバーは使用していません。
 
-## 🎮 ゲーム概要
+## 公開先
 
-横スクロールのエンドレスランナーゲームです。自動で走り続ける棒人間キャラクターを操作して、迫りくる障害物をジャンプで回避します。障害物に接触するとゲームオーバーです。
+GitHub Pages: <https://tailofyukki-cell.github.io/endless-runner-game/>
 
-## ✨ 特徴
+リポジトリ: <https://github.com/tailofyukki-cell/endless-runner-game>
 
-- **3つの難易度**: イージー、ノーマル、ハードから選択可能
-- **シンプルな操作**: クリック/タップ/Enterキーでジャンプ
-- **PC/スマホ対応**: レスポンシブデザインでどのデバイスでも快適にプレイ
-- **軽量**: 外部ライブラリ不要、Canvas APIのみで実装
+## 遊び方
 
-## 🕹️ 遊び方
+ランナーは自動で走ります。地面にいるときだけジャンプでき、空中での連続入力は無効です。障害物に当たるとゲームオーバーになりますが、シールドを持っていれば一度だけ接触を防げます。
 
-### 操作方法
+| 操作 | PC | スマートフォン・タブレット |
+|---|---|---|
+| ジャンプ・再開 | クリック、Enter、Space | ゲーム画面をタップ |
+| ポーズ・再開 | P、Escape、HUDの一時停止ボタン | HUDの一時停止ボタン |
+| 設定 | タイトル画面の「設定を開く」 | 同左 |
 
-- **PC**: マウスクリック または Enterキー
-- **スマホ/タブレット**: 画面タップ
+## 難易度
 
-### 難易度の違い
+| 難易度 | 特徴 | 初期危険度 |
+|---|---|---|
+| イージー | 速度・加速とも穏やかで練習向き | ウォームアップ |
+| ノーマル | 標準的な速度と出現間隔 | ウォームアップ |
+| ハード | 高速で開始し、障害物の間隔も短い | スピードアップ |
 
-| 難易度 | 初期速度 | 障害物の頻度 | 加速率 |
-|--------|----------|--------------|--------|
-| イージー | 遅い | 低い | 緩やか |
-| ノーマル | 標準 | 標準 | 標準 |
-| ハード | 速い | 高い | 急激 |
+走行スコアが100、250、450に達すると危険度が上がり、速度と出現する障害物の種類が増えます。
 
-### ゲームの流れ
+## 追加されたゲーム要素
 
-1. タイトル画面で難易度を選択
-2. ゲーム開始
-3. ジャンプで障害物を回避
-4. 障害物に接触するとゲームオーバー
-5. リトライまたはタイトルへ戻る
+### 障害物・収集物・パワーアップ
 
-## 🚀 プレイ方法
+地上スパイク、二連スパイク、木箱、高い木箱、飛行する鳥が出現します。コインは累計で保存され、スキン・テーマの解除条件に使われます。シールドは次の接触を一回だけ無効化し、スローモーションは短時間だけコースの速度を下げます。
 
-### オンラインでプレイ
+### 記録と継続要素
 
-GitHub Pagesで公開しています:
-[https://[ユーザー名].github.io/endless-runner-game/](https://[ユーザー名].github.io/endless-runner-game/)
+難易度別ベストスコア、累計コイン、プレイ回数、実績、日替わりチャレンジ、選択中の外観、設定はブラウザのLocalStorageに保存されます。ネットワーク接続やアカウント登録は必要ありません。日替わりチャレンジはローカル日付から決まり、毎日異なる目標を提示します。
 
-### ローカルで実行
+| 実績 | 解除条件 |
+|---|---|
+| 初めの一歩 | 1回プレイする |
+| 収集家 | 累計コイン25枚 |
+| 守護者 | シールドで接触を防ぐ |
+| 風を切る者 | スコア250に到達する |
+| 挑戦者 | ハードでスコア100に到達する |
+| デイリー達成 | 日替わりチャレンジを達成する |
 
-1. リポジトリをクローン:
+### 演出とカスタマイズ
+
+多層の雲・山・森・地面を流すパララックス背景、昼夜の色変化、粒子、画面揺れ、Web Audio APIによる効果音を実装しています。タイトル画面のコレクションからランナースキンと背景テーマを選択でき、解除状態と選択状態は保存されます。
+
+### 操作性とアクセシビリティ
+
+一時停止後には3秒のカウントダウンを表示してから再開します。設定では効果音のミュート、音量、動き低減を選べます。動き低減を有効にすると、画面揺れと粒子表現を抑えます。すべての主要操作はキーボードでフォーカスできます。
+
+## ローカルでの実行
+
+静的ファイルだけで構成されています。リポジトリを取得し、任意のローカルHTTPサーバーで開いてください。
+
 ```bash
-git clone https://github.com/[ユーザー名]/endless-runner-game.git
+git clone https://github.com/tailofyukki-cell/endless-runner-game.git
 cd endless-runner-game
-```
-
-2. ローカルサーバーを起動:
-```bash
-# Python 3を使用する場合
 python3 -m http.server 8000
-
-# Node.jsを使用する場合
-npx http-server
 ```
 
-3. ブラウザで開く:
-```
-http://localhost:8000
-```
+ブラウザで <http://localhost:8000/> を開きます。
 
-## 📁 ファイル構成
+## 構成
 
-```
-endless-runner-game/
-├── index.html      # メインHTMLファイル
-├── styles.css      # スタイルシート
-├── main.js         # ゲームロジック
-└── README.md       # このファイル
-```
+| パス | 内容 |
+|---|---|
+| `index.html` | タイトル、ゲーム、ポーズ、結果、設定の画面構造 |
+| `styles.css` | レスポンシブレイアウト、視覚状態、アクセシビリティ用スタイル |
+| `main.js` | 画面遷移、入力、保存、実績、設定の統合 |
+| `js/game.js` | 物理、生成、衝突、スコア、パワーアップ |
+| `js/renderer.js` | Canvas描画、背景、障害物、パーティクル |
+| `js/storage.js` | LocalStorageの正規化、記録、日替わりチャレンジ |
+| `js/audio.js` | Web Audio APIによる短い効果音 |
+| `js/config.js` | 難易度、実績、スキン、テーマの定義 |
+| `tests/game-world.test.mjs` | コアゲーム規則の軽量自動テスト |
 
-## 🛠️ 技術スタック
+## テスト
 
-- **HTML5**: Canvas API
-- **CSS3**: レスポンシブデザイン
-- **JavaScript**: バニラJS (ライブラリ不要)
+Node.js 22以降では、以下のコマンドでコアゲーム規則の自動テストを実行できます。
 
-## 📝 実装の詳細
-
-### ゲームループ
-
-`requestAnimationFrame`を使用した滑らかなゲームループを実装しています。
-
-### 当たり判定
-
-矩形の衝突判定を使用し、プレイヤーと障害物の接触を検出します。
-
-### 難易度調整
-
-難易度に応じて以下のパラメータが変化します:
-- ゲーム速度
-- 速度の加速率
-- 障害物の出現頻度
-
-## 🎨 カスタマイズ
-
-`main.js`の`difficultySettings`オブジェクトを編集することで、難易度のパラメータを調整できます:
-
-```javascript
-const difficultySettings = {
-    easy: {
-        initialSpeed: 4,
-        speedIncrement: 0.001,
-        obstacleSpawnRate: 0.008,
-        label: 'イージー'
-    },
-    // ...
-};
+```bash
+node --experimental-default-type=module tests/game-world.test.mjs
 ```
 
-## 🐛 既知の問題
+テストでは、二段ジャンプの防止、障害物生成、コイン取得、シールドによる接触防御、危険度上昇を確認します。
 
-現在、既知の問題はありません。バグを見つけた場合は、Issuesでお知らせください。
+## GitHub Pagesへのデプロイ
 
-## 📄 ライセンス
+このリポジトリは静的ファイルのみで動作します。GitHubの **Settings → Pages** で、公開元を `main` ブランチの `/(root)` に設定するとGitHub Pagesへ公開できます。更新後は`main`へプッシュすると公開内容が反映されます。
 
-MIT License
+## ライセンス
 
-Copyright (c) 2026
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-
-## 🤝 貢献
-
-プルリクエストを歓迎します! 大きな変更の場合は、まずIssueを開いて変更内容を議論してください。
-
-## 📧 お問い合わせ
-
-質問や提案がある場合は、GitHubのIssuesでお知らせください。
-
----
-
-**楽しんでプレイしてください! 🎮✨**
+[MIT License](LICENSE) の下で公開しています。

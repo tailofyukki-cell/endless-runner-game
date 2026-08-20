@@ -2,47 +2,124 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Endless Runner - 2D Game</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#17264f">
+    <title>Sky Sprint — エンドレスランナー</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Title Screen -->
-    <div id="titleScreen" class="screen">
-        <h1>🏃 Endless Runner</h1>
-        <p class="subtitle">棒人間を操作して障害物を避けよう!</p>
-        
-        <div class="difficulty-select">
-            <h2>難易度を選択</h2>
-            <button class="difficulty-btn" data-difficulty="easy">イージー</button>
-            <button class="difficulty-btn" data-difficulty="normal">ノーマル</button>
-            <button class="difficulty-btn" data-difficulty="hard">ハード</button>
-        </div>
-        
-        <div class="controls-info">
-            <h3>操作方法</h3>
-            <p>PC: クリック または Enter キー</p>
-            <p>スマホ: 画面タップ</p>
-        </div>
-    </div>
+    <main class="app-shell">
+        <section id="titleScreen" class="screen title-screen" aria-labelledby="gameTitle">
+            <div class="title-card">
+                <p class="eyebrow">CANVAS ENDLESS RUNNER</p>
+                <h1 id="gameTitle">Sky Sprint</h1>
+                <p class="subtitle">走って、跳んで、空の向こうへ。</p>
 
-    <!-- Game Screen -->
-    <div id="gameScreen" class="screen" style="display: none;">
-        <div class="game-info">
-            <div class="info-item">スコア: <span id="score">0</span></div>
-            <div class="info-item">難易度: <span id="currentDifficulty">-</span></div>
+                <div class="difficulty-select" aria-labelledby="difficultyTitle">
+                    <h2 id="difficultyTitle">難易度を選択</h2>
+                    <div class="difficulty-grid">
+                        <button class="difficulty-btn easy" data-difficulty="easy" type="button">
+                            <span>イージー</span><small>ゆっくり練習</small>
+                        </button>
+                        <button class="difficulty-btn normal" data-difficulty="normal" type="button">
+                            <span>ノーマル</span><small>バランス型</small>
+                        </button>
+                        <button class="difficulty-btn hard" data-difficulty="hard" type="button">
+                            <span>ハード</span><small>高速チャレンジ</small>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="progress-panel" aria-label="あなたの記録">
+                    <div class="progress-head">
+                        <strong>あなたの記録</strong>
+                        <span id="achievementCount">実績 0/6</span>
+                    </div>
+                    <div id="bestScores" class="best-scores" aria-live="polite"></div>
+                    <div class="progress-meta"><span>累計コイン <strong id="totalCoins">0</strong></span><span>プレイ回数 <strong id="totalRuns">0</strong></span></div>
+                </div>
+
+                <div class="daily-card" aria-label="日替わりチャレンジ">
+                    <span class="daily-label">TODAY'S RUN</span>
+                    <strong id="dailyTitle">日替わりチャレンジ</strong>
+                    <p id="dailyProgress">進捗 0 / 0</p>
+                </div>
+
+                <section class="collection-panel" aria-labelledby="collectionTitle">
+                    <div class="progress-head">
+                        <strong id="collectionTitle">コレクション</strong>
+                        <span>コインと記録で解除</span>
+                    </div>
+                    <div class="collection-group">
+                        <span class="collection-label">ランナースキン</span>
+                        <div id="skinOptions" class="cosmetic-options" role="group" aria-label="ランナースキン"></div>
+                    </div>
+                    <div class="collection-group">
+                        <span class="collection-label">背景テーマ</span>
+                        <div id="themeOptions" class="cosmetic-options" role="group" aria-label="背景テーマ"></div>
+                    </div>
+                </section>
+
+                <div class="controls-info">
+                    <strong>操作</strong>
+                    <p>PC：クリック / Enter / Space　　スマホ：画面タップ</p>
+                    <p>空中ではジャンプできません。コインとパワーアップを集めよう。</p>
+                    <button id="settingsBtn" class="text-btn" type="button">設定を開く</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="gameScreen" class="screen game-screen" hidden aria-label="ゲーム画面">
+            <div class="game-hud" aria-live="polite">
+                <div class="hud-group left">
+                    <div class="hud-chip"><span class="hud-label">SCORE</span><strong id="score">0</strong></div>
+                    <div class="hud-chip coin"><span aria-hidden="true">●</span><strong id="runCoins">0</strong></div>
+                </div>
+                <div class="hud-group right">
+                    <div class="hud-chip compact"><span id="threatLabel">ウォームアップ</span></div>
+                    <div class="hud-chip compact"><span id="currentDifficulty">ノーマル</span></div>
+                    <button id="pauseBtn" class="icon-btn" type="button" aria-label="ゲームを一時停止">Ⅱ</button>
+                </div>
+            </div>
+            <canvas id="gameCanvas" aria-label="Sky Sprintのゲーム画面"></canvas>
+        </section>
+
+        <section id="pauseOverlay" class="overlay-card" hidden role="dialog" aria-modal="true" aria-labelledby="pauseTitle">
+            <div>
+                <p class="eyebrow">TAKE A BREATH</p>
+                <h2 id="pauseTitle">一時停止中</h2>
+                <p id="pauseMessage">準備ができたら再開しましょう。</p>
+                <button id="resumeBtn" class="primary-btn" type="button">再開する</button>
+                <button id="pauseToTitleBtn" class="secondary-btn" type="button">タイトルへ戻る</button>
+            </div>
+        </section>
+
+        <section id="gameOverScreen" class="screen result-screen" hidden aria-labelledby="gameOverTitle">
+            <div class="result-card">
+                <p class="eyebrow">RUN COMPLETE</p>
+                <h2 id="gameOverTitle">Game Over</h2>
+                <div class="result-score"><span>今回のスコア</span><strong id="finalScore">0</strong></div>
+                <p id="runSummary" class="run-summary">コイン 0枚</p>
+                <div class="result-actions">
+                    <button id="retryBtn" class="primary-btn" type="button">もう一度走る</button>
+                    <button id="backToTitleBtn" class="secondary-btn" type="button">タイトルへ戻る</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <section id="settingsDialog" class="settings-dialog" hidden role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
+        <div class="settings-card">
+            <div class="dialog-head"><h2 id="settingsTitle">設定</h2><button id="closeSettingsBtn" class="icon-btn" type="button" aria-label="設定を閉じる">×</button></div>
+            <label class="setting-row"><span>効果音をミュート</span><input id="muteToggle" type="checkbox"></label>
+            <label class="setting-row volume-row"><span>効果音の音量</span><input id="volumeControl" type="range" min="0" max="100" step="5" value="50"></label>
+            <label class="setting-row"><span>動きを少なくする</span><input id="reducedMotionToggle" type="checkbox"></label>
+            <p class="setting-note">動きを少なくすると、画面揺れと粒子表現を抑えます。</p>
+            <button id="resetSaveBtn" class="danger-btn" type="button">このブラウザの記録をリセット</button>
         </div>
-        <canvas id="gameCanvas"></canvas>
-    </div>
+    </section>
 
-    <!-- Game Over Screen -->
-    <div id="gameOverScreen" class="screen" style="display: none;">
-        <h1>Game Over</h1>
-        <p class="final-score">スコア: <span id="finalScore">0</span></p>
-        <button id="retryBtn" class="action-btn">リトライ</button>
-        <button id="backToTitleBtn" class="action-btn">タイトルへ戻る</button>
-    </div>
-
-    <script src="main.js"></script>
+    <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+    <script type="module" src="main.js"></script>
 </body>
 </html>
