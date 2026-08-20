@@ -5,6 +5,10 @@ const events = [];
 const world = new GameWorld('normal', (type, payload) => events.push({ type, payload }));
 world.resize(800, 420);
 
+assert.equal(world.player.x, 80, '横幅800pxでは左余白を80pxに抑える');
+world.resize(320, 420);
+assert.equal(world.player.x, 56, '小画面でも安全な最小左余白を維持する');
+world.resize(800, 420);
 assert.equal(world.player.isGrounded, true, 'プレイヤーは地面から開始する');
 assert.equal(world.primaryAction(), true, '地上ではジャンプできる');
 assert.equal(world.primaryAction(), false, '空中で二段ジャンプできない');

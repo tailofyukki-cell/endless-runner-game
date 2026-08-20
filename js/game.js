@@ -4,7 +4,7 @@ import {
     OBSTACLE_TYPES,
     PICKUP_TYPES,
     THREAT_LEVELS
-} from './config.js';
+} from './config.js?v=runner-layout-20260821';
 
 function clamp(value, min, max) {
     return Math.max(min, Math.min(max, value));
@@ -48,7 +48,7 @@ export class GameWorld {
         this.spawnRemaining = 1.4;
         this.lastEntityRight = 0;
         this.player = {
-            x: GAME_CONSTANTS.playerX,
+            x: 0,
             y: 0,
             width: GAME_CONSTANTS.playerWidth,
             height: GAME_CONSTANTS.playerHeight,
@@ -65,6 +65,11 @@ export class GameWorld {
         this.height = Math.max(260, height);
         this.groundY = this.height - GAME_CONSTANTS.groundHeight;
         if (this.player) {
+            this.player.x = clamp(
+                Math.round(this.width * GAME_CONSTANTS.playerInsetRatio),
+                GAME_CONSTANTS.playerInsetMin,
+                GAME_CONSTANTS.playerInsetMax
+            );
             if (this.player.isGrounded || this.player.y > this.groundY - this.player.height) {
                 this.player.y = this.groundY - this.player.height;
             }

@@ -101,7 +101,9 @@ export const PICKUP_TYPES = {
 export const GAME_CONSTANTS = {
     canvasHeight: 420,
     groundHeight: 74,
-    playerX: 125,
+    playerInsetRatio: 0.10,
+    playerInsetMin: 56,
+    playerInsetMax: 80,
     playerWidth: 28,
     playerHeight: 50,
     gravity: 1900,

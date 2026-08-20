@@ -1,5 +1,5 @@
-import { ACHIEVEMENTS, DIFFICULTIES, SKINS, THEMES } from './js/config.js';
-import { GameWorld } from './js/game.js';
+import { ACHIEVEMENTS, DIFFICULTIES, SKINS, THEMES } from './js/config.js?v=runner-layout-20260821';
+import { GameWorld } from './js/game.js?v=runner-layout-20260821';
 import { Renderer } from './js/renderer.js';
 import { AudioManager } from './js/audio.js';
 import {
